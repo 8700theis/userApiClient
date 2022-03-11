@@ -1,0 +1,181 @@
+/*
+
+    Variabler
+
+*/
+
+:root {
+    --grid-colums: 25% 25% 25% 25%;
+    --grid-border: 1px solid black;
+    --grid-padding: 8px 4px;
+}
+
+/*
+
+    Generelt
+
+*/
+
+html {
+    box-sizing: border-box;
+    
+}
+
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+body {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    background-color: blanchedalmond;
+    padding: 50px;
+}
+
+
+/* 
+
+    Toasts for "messages" fra serveren 
+
+*/
+
+.toast {
+
+    color: white;
+    position: fixed;
+    padding: 20px;
+    background-color: green;
+    top: -60px;
+    width: 100vw;
+    left: 0;
+    transition: top 500ms ease 0s; 
+    
+}
+
+.toast.active {
+    top: 0;
+}
+
+/* 
+
+    Grid Setup List 
+
+*/
+
+.grid-header {
+    display: grid;
+    grid-template-columns: var(--grid-colums);
+    border-top:  var(--grid-border);
+    border-right:  var(--grid-border);
+}
+
+.grid-header > span {
+    padding: var(--grid-padding);
+    border-left: var(--grid-border);
+    border-bottom: var(--grid-border);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.grid-list {
+    display: grid;
+    grid-template-columns: var(--grid-colums);
+    border-right:  var(--grid-border);
+}
+
+.grid-list > span {
+    padding: var(--grid-padding);
+    border-left: var(--grid-border);
+    border-bottom: var(--grid-border);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    position: relative;
+    
+}
+
+/* 
+
+    Grid Content
+
+*/
+
+input[type="file"] {
+    display: block;
+}
+
+.grid-profile-image {
+    width:20px;
+    height:20px;
+    border-radius:10px;
+    margin: auto;
+}
+
+.grid-hidden-input {
+    visibility: hidden; 
+    width:0;
+    position:absolute;
+}
+
+.grid-update-form {
+    margin-right: 10px;
+  
+}
+
+.grid-update-form input {
+  width: 100%;
+  
+}
+
+.grid-actions {
+    text-align: center;
+}
+
+.client-input {
+
+    padding: 10px;
+    width: 100%;
+    border: 0px;
+
+}
+
+.client-label {
+
+    margin: 10px 0;
+    display: block;
+    
+}
+
+#userList .userimage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#userList span {
+    display: flex;
+    align-items: center;
+}
+
+#userList .userimage div {
+    width: 120px;
+    height: 120px;
+}
+
+#userList .userimage div img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+@media only screen and (min-width: 600px) {
+
+    .grid-profile-image {
+        width:120px;
+        height:120px;
+        border-radius:60px;
+        margin: auto;
+    }
+
+}
