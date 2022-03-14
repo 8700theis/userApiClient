@@ -1,51 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-    <link rel="stylesheet" href="/css/index.css" >
+    <link rel="stylesheet" href="/css/index.css">
     <script src="/js/index.js" type="module" defer></script>
 
     <title>Client</title>
 </head>
 
 <body>
-    
     <div class="toast"></div>
-
     <section>
         <h2>Opret Bruger.</h2>
-
         <form id="userCreateForm">
             <label for="inpUserName" class="client-label">Bruger</label>
             <input id="inpUserName" class="client-input" type="text" placeholder="indtast brugernavn" required/>
             <label for="inpUserImage" class="client-label">Billede</label>
             <input id="inpUserImage" class="" type="file" required/>
             <br/><br/>
-            <button type="submit">Opret</button>
+            <button type="submit">Opret Bruger</button>
+        </form>
+    </section>
+
+    <section>
+        <h2>Opdater Bruger.</h2>
+        <form id="userUpdateForm">
+            <label for="inpUserNameUpdate" class="client-label">Bruger</label>
+            <input id="inpUserNameUpdate" class="client-input" type="text" placeholder="indtast brugernavn" required/>
+            <label for="inpUserImageUpdate" class="client-label">Billede</label>
+            <input id="inpUserImageUpdate" class="" type="file" required/>
+            <br/><br/>
+            <button type="submit">Opdater Bruger</button>
         </form>
     </section>
 
     <section>
         <h2>Bruger Liste.</h2>
-
         <!-- Header for vores grid/table view -->
         <div class="grid-header">
-
             <span><strong>ID (_id)</strong></span>
             <span><strong>PROFIL BILLEDE</strong></span>
             <span><strong>NAVN</strong></span>
             <span><strong>ACTIONS</strong></span>
-         
         </div>
-
         <!-- Conatiner for vores grid/table users view -->
         <div class="grid-list" id="userList"></div>
     </section>
-
 </body>
 
 </html>

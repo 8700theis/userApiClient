@@ -6,6 +6,8 @@ app.init = () => {
     console.log('Application Init');
     let createUserForm = document.querySelector('#userCreateForm');
     createUserForm.addEventListener('submit', app.createUser);
+    let updateUserForm = document.querySelector('#userUpdateForm');
+    createUserForm.addEventListener('submit', app.updateUser);
     app.renderUsers();
 }
 
@@ -26,7 +28,7 @@ app.renderUsers = () => {
         //Tømmer containeren for brugere
         usersContainer.innerHTML = '';
 
-        if(users.length === 0) {
+        if (users.length === 0) {
             //Udskriver ingen brugere
             users.map(() => {
                 usersContainer.insertAdjacentHTML('beforeend', emptyTemplate);
@@ -49,18 +51,16 @@ app.getUsers = () => {
 }
 
 app.postNewuser = (userName, userImage) => {
-
     var formdata = new FormData();
-        formdata.append("name", userName);
-        formdata.append("userImage", userImage.files[0]);
-
+    formdata.append("name", userName);
+    formdata.append("userImage", userImage.files[0]);
     var requestOptions = {
         method: 'POST',
         body: formdata,
         redirect: 'follow'
     };
     return fetch('http://localhost:3000/user', requestOptions)
-    .then((res) => res.json());
+        .then((res) => res.json());
 }
 
 app.createUser = (e) => {
@@ -69,8 +69,33 @@ app.createUser = (e) => {
     let username = document.querySelector('#inpUserName');
     let userimage = document.querySelector('#inpUserImage');
 
-    console.log(userimage.files[0]);
     app.postNewuser(username.value, userimage).then((res) => {
+        app.renderToast(res.message);
+        username.value = '';
+        userimage.value = '';
+        app.renderUsers();
+    });
+}
+
+app.patchUser = (userName, userImage) => {
+    var formdata = new FormData();
+    formdata.append("name", userName);
+    formdata.append("userImage", userImage.files[0]);
+    var requestOptions = {
+        method: 'PATCH',
+        body: formdata,
+        redirect: 'follow'
+    };
+    return fetch('http://localhost:3000/user', requestOptions)
+        .then((res) => res.json());
+}
+
+app.updateUser = (e) => {
+    //stopper normal opførsel (refresh af side)
+    e.preventDefault();
+    let username = document.querySelector('#inpUserNameUpdate');
+    let userimage = document.querySelector('#inpUserImageUpdate');
+    app.patchUser(username.value, userimage).then((res) => {
         app.renderToast(res.message);
         username.value = '';
         userimage.value = '';
@@ -84,7 +109,7 @@ app.deleteSingleUSer = (id) => {
         redirect: 'follow'
     };
     return fetch(`http://localhost:3000/user/${id}`, requestOptions)
-    .then((res) => res.json());
+        .then((res) => res.json());
 }
 
 app.deleteUser = (e) => {
