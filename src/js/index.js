@@ -7,7 +7,7 @@ app.init = () => {
     let createUserForm = document.querySelector('#userCreateForm');
     createUserForm.addEventListener('submit', app.createUser);
     let updateUserForm = document.querySelector('#userUpdateForm');
-    createUserForm.addEventListener('submit', app.updateUser);
+    updateUserForm.addEventListener('submit', app.updateUser);
     app.renderUsers();
 }
 
@@ -77,16 +77,16 @@ app.createUser = (e) => {
     });
 }
 
-app.patchUser = (userName, userImage) => {
+app.patchUser = (userName, newUserName, userImage) => {
     var formdata = new FormData();
-    formdata.append("name", userName);
+    formdata.append("name", newUserName);
     formdata.append("userImage", userImage.files[0]);
     var requestOptions = {
         method: 'PATCH',
         body: formdata,
         redirect: 'follow'
     };
-    return fetch('http://localhost:3000/user', requestOptions)
+    return fetch(`http://localhost:3000/user/${userName}`, requestOptions)
         .then((res) => res.json());
 }
 
@@ -94,11 +94,13 @@ app.updateUser = (e) => {
     //stopper normal opførsel (refresh af side)
     e.preventDefault();
     let username = document.querySelector('#inpUserNameUpdate');
+    let newUserName = document.querySelector('#inpUserNameNewUpdate');
     let userimage = document.querySelector('#inpUserImageUpdate');
-    app.patchUser(username.value, userimage).then((res) => {
+    app.patchUser(username.value, newUserName.value, userimage).then((res) => {
         app.renderToast(res.message);
         username.value = '';
         userimage.value = '';
+        newUserName.value = '';
         app.renderUsers();
     });
 }
